@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBed,
@@ -15,6 +16,8 @@ import "react-calendar/dist/Calendar.css";
 import "./header.css";
 
 const Header = ({ type = "" }) => {
+  const navigate = useNavigate();
+  const [destination, setDestination] = useState("");
   const [date, setDate] = useState([
     new Date(Date.now()),
     new Date(Date.now()),
@@ -62,6 +65,17 @@ const Header = ({ type = "" }) => {
     setOptionOpen(false);
   };
 
+  // Handle search
+  const handleSearch = () => {
+    navigate("/lists", {
+      state: {
+        destination,
+        options,
+        date,
+      },
+    });
+  };
+
   return (
     <>
       <div className="header">
@@ -102,7 +116,12 @@ const Header = ({ type = "" }) => {
                 <div className="headerSearch">
                   <div className="headerSearchItem">
                     <FontAwesomeIcon icon={faBed} className="headerIcon" />
-                    <input type="text" placeholder="Where are you going?" />
+                    <input
+                      type="text"
+                      placeholder="Where are you going?"
+                      value={destination}
+                      onChange={(e) => setDestination(e.target.value)}
+                    />
                   </div>
                   <div className="headerSearchItem">
                     <FontAwesomeIcon
@@ -184,7 +203,9 @@ const Header = ({ type = "" }) => {
                     )}
                   </div>
                   <div className="headerSearchItem">
-                    <div className="btn">Search</div>
+                    <div className="btn" onClick={handleSearch}>
+                      Search
+                    </div>
                   </div>
                 </div>
               </div>
