@@ -24,7 +24,7 @@ const Nav = () => {
           <FontAwesomeIcon
             onClick={() => setToggled(!toggled)}
             icon={toggled ? faXmark : faBars}
-            className="toggleIcon"
+            className={`toggleIcon ${toggled && "toggleMode"} `}
           />
         </div>
       </div>

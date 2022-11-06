@@ -13,9 +13,8 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 
 import "./header.css";
-import Nav from "../nav/Nav";
 
-const Header = () => {
+const Header = ({ type = "" }) => {
   const [date, setDate] = useState([
     new Date(Date.now()),
     new Date(Date.now()),
@@ -65,10 +64,13 @@ const Header = () => {
 
   return (
     <>
-      <Nav />
       <div className="header">
         <div className="headerContainer">
-          <div className="headerCategories">
+          <div
+            className={`${
+              type === "list" ? "headerCategories listMode" : "headerCategories"
+            }`}
+          >
             <div className="headerCategory active">
               <FontAwesomeIcon icon={faBed} className="headerIcon" />
               <span>Stay</span>
@@ -90,93 +92,104 @@ const Header = () => {
               <span>Airport Taxis</span>
             </div>
           </div>
-          <div className="headerTitle">
-            <h1>Find your next stay</h1>
-            <h2>Search deals on hotels, homes, and much more...</h2>
-          </div>
-          <div className="headerSearch">
-            <div className="headerSearchItem">
-              <FontAwesomeIcon icon={faBed} className="headerIcon" />
-              <input type="text" placeholder="Where are you going?" />
-            </div>
-            <div className="headerSearchItem">
-              <FontAwesomeIcon icon={faCalendarDays} className="headerIcon" />
-              <span onClick={handleCalendarOpen}>
-                {`${formatDate(date[0])} to ${formatDate(date[1])}`}
-              </span>
-              {/* Popup calendar */}
-              {calendarOpen && (
-                <div className="headerCalendar">
-                  <Calendar
-                    selectRange={true}
-                    onChange={setDate}
-                    value={date}
-                  />
-                </div>
-              )}
-            </div>
+          {type !== "list" && (
+            <>
+              <div className="headerTitle">
+                <h1>Find your next stay</h1>
+                <h2>Search deals on hotels, homes, and much more...</h2>
+              </div>
+              <div className="headerSearchContainer">
+                <div className="headerSearch">
+                  <div className="headerSearchItem">
+                    <FontAwesomeIcon icon={faBed} className="headerIcon" />
+                    <input type="text" placeholder="Where are you going?" />
+                  </div>
+                  <div className="headerSearchItem">
+                    <FontAwesomeIcon
+                      icon={faCalendarDays}
+                      className="headerIcon"
+                    />
+                    <span onClick={handleCalendarOpen}>
+                      {`${formatDate(date[0])} to ${formatDate(date[1])}`}
+                    </span>
+                    {/* Popup calendar */}
+                    {calendarOpen && (
+                      <div className="headerCalendar">
+                        <Calendar
+                          selectRange={true}
+                          onChange={setDate}
+                          value={date}
+                        />
+                      </div>
+                    )}
+                  </div>
 
-            <div className="headerSearchItem">
-              <FontAwesomeIcon icon={faPerson} className="headerIcon" />
-              <span
-                onClick={handleOptionOpen}
-              >{`${options.adults} adult • ${options.children} children • ${options.room} room`}</span>
+                  <div className="headerSearchItem">
+                    <FontAwesomeIcon icon={faPerson} className="headerIcon" />
+                    <span
+                      onClick={handleOptionOpen}
+                    >{`${options.adults} adult • ${options.children} children • ${options.room} room`}</span>
 
-              {/* Options selection */}
-              {optionOpen && (
-                <div className="options">
-                  <div className="optionItem">
-                    <span className="optionText">Adult</span>
-                    <div className="optionCounter">
-                      <button
-                        disabled={options.adults === 1}
-                        onClick={() => handleOption("adults", "d")}
-                      >
-                        -
-                      </button>
-                      <span>{options.adults}</span>
-                      <button onClick={() => handleOption("adults", "i")}>
-                        +
-                      </button>
-                    </div>
+                    {/* Options selection */}
+                    {optionOpen && (
+                      <div className="options">
+                        <div className="optionItem">
+                          <span className="optionText">Adult</span>
+                          <div className="optionCounter">
+                            <button
+                              disabled={options.adults === 1}
+                              onClick={() => handleOption("adults", "d")}
+                            >
+                              -
+                            </button>
+                            <span>{options.adults}</span>
+                            <button onClick={() => handleOption("adults", "i")}>
+                              +
+                            </button>
+                          </div>
+                        </div>
+                        <div className="optionItem">
+                          <span className="optionText">Children</span>
+                          <div className="optionCounter">
+                            <button
+                              disabled={options.children === 0}
+                              onClick={() => handleOption("children", "d")}
+                            >
+                              -
+                            </button>
+                            <span>{options.children}</span>
+                            <button
+                              onClick={() => handleOption("children", "i")}
+                            >
+                              +
+                            </button>
+                          </div>
+                        </div>
+                        <div className="optionItem">
+                          <span className="optionText">Room</span>
+                          <div className="optionCounter">
+                            <button
+                              disabled={options.room === 1}
+                              onClick={() => handleOption("room", "d")}
+                            >
+                              -
+                            </button>
+                            <span>{options.room}</span>
+                            <button onClick={() => handleOption("room", "i")}>
+                              +
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </div>
-                  <div className="optionItem">
-                    <span className="optionText">Children</span>
-                    <div className="optionCounter">
-                      <button
-                        disabled={options.children === 0}
-                        onClick={() => handleOption("children", "d")}
-                      >
-                        -
-                      </button>
-                      <span>{options.children}</span>
-                      <button onClick={() => handleOption("children", "i")}>
-                        +
-                      </button>
-                    </div>
-                  </div>
-                  <div className="optionItem">
-                    <span className="optionText">Room</span>
-                    <div className="optionCounter">
-                      <button
-                        disabled={options.room === 1}
-                        onClick={() => handleOption("room", "d")}
-                      >
-                        -
-                      </button>
-                      <span>{options.room}</span>
-                      <button onClick={() => handleOption("room", "i")}>
-                        +
-                      </button>
-                    </div>
+                  <div className="headerSearchItem">
+                    <div className="btn">Search</div>
                   </div>
                 </div>
-              )}
-            </div>
-            <div className="headerSearchItem">
-              <div className="btn">Search</div>
-            </div>
-          </div>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </>
