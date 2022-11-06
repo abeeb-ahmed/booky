@@ -215,4 +215,12 @@
     left: 0;
     z-index: 900;
   }
+  .headerTitle > h1 {
+    font-size: 35px;
+  }
+
+  .headerTitle > h2 {
+    font-size: 24px;
+    font-weight: 400;
+  }
 }
