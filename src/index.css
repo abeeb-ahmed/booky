@@ -18,6 +18,11 @@ p {
   font-size: 18px;
 }
 
+input::placeholder {
+  font-family: inherit;
+  font-size: inherit;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;

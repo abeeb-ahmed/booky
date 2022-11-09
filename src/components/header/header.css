@@ -117,7 +117,7 @@
 }
 
 .headerSearchItem > .btn {
-  background-color: #4267b2;
+  background-color: #0071c2;
   padding: 10px 20px;
   cursor: pointer;
   font-size: 18px;
@@ -159,9 +159,9 @@
   width: 30px;
   height: 30px;
   background-color: #fff;
-  border: 1px solid #4267b2;
+  border: 1px solid #0071c2;
   cursor: pointer;
-  color: #4267b2;
+  color: #0071c2;
 }
 
 .optionCounter button:disabled {
@@ -222,5 +222,11 @@
   .headerTitle > h2 {
     font-size: 24px;
     font-weight: 400;
+  }
+  .headerSearchItem > .btn {
+    font-size: 16px;
+  }
+  .headerCategories.listMode {
+    margin-bottom: 20px;
   }
 }

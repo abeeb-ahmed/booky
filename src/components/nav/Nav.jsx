@@ -11,7 +11,9 @@ const Nav = () => {
   return (
     <div className="nav">
       <div className="navContainer">
-        <span className="logoText">Booky</span>
+        <Link to="/">
+          <span className="logoText">Booky</span>
+        </Link>
         <ul className="navLinks">
           <Link to="#" className="link">
             Register
