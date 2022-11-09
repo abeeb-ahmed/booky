@@ -47,6 +47,7 @@
 .listSearch input {
   padding: 10px;
   border: 0;
+  outline: none;
 }
 
 .listMain {

@@ -45,6 +45,7 @@
   }
   .mailingListSubscribe input {
     padding: 10px;
+    outline: none;
   }
   .mailingListSubscribe button {
     padding: 10px;
